@@ -4,7 +4,7 @@ A Cisco Packet Tracer lab simulating the enterprise network for a gaming center 
 
 ## Topology
 
-![Topology](Topology.png)
+![Topology](Configurations/Images/Topology.png)
 
 ## What This Lab Demonstrates
 
@@ -92,50 +92,10 @@ show etherchannel summary
 show ip route
 show ip nat translations
 ```
+## Documentation
 
-## Repository Structure
-```
-Gaming-Center-Network-Design/
-├── README.md
-├── Topology.png
-└── screenshots/
-    ├── 01_VLAN_ACCESS-SW1.png
-    ├── 02_VLAN_ACCESS-SW2.png
-    ├── 03_TRUNK_ACCESS-SW1.png
-    ├── 04_TRUNK_ACCESS-SW2.png
-    ├── 05_ETHERCHANNEL_ACCESS-SW1.png
-    ├── 06_ETHERCHANNEL_ACCESS-SW2.png
-    ├── 07_ETHERCHANNEL_L3-SW1.png
-    ├── 08_SVI_L3-SW1.png
-    ├── 09_ROUTES_L3-SW1.png
-    ├── 10_DHCP_L3-SW1.png
-    ├── 11_ACL_L3-SW1.png
-    ├── 12_ACL-configured-in-VLAN10_20_30_L3-SW1.png
-    ├── 13_ROUTS_EDGE-R1.png
-    ├── 14_NAT_EDGE-R1.png
-    └── 15_NAT-translation_EDGE-R1.png
-```
-
-## Screenshot Gallery
-
-| # | Description |
-|---|---|
-| 01 | `show vlan brief` — Access-SW1 |
-| 02 | `show vlan brief` — Access-SW2 |
-| 03 | `show interfaces trunk` — Access-SW1 |
-| 04 | `show interfaces trunk` — Access-SW2 |
-| 05 | `show etherchannel summary` — Access-SW1 |
-| 06 | `show etherchannel summary` — Access-SW2 |
-| 07 | `show etherchannel summary` — L3-SW1 (both port-channels) |
-| 08 | SVI IP addresses — L3-SW1 |
-| 09 | `show ip route` — L3-SW1 |
-| 10 | DHCP pool configuration — L3-SW1 |
-| 11 | ACL definitions — L3-SW1 |
-| 12 | ACLs applied to VLAN 10/20/30 SVIs — L3-SW1 |
-| 13 | `show ip route` — EDGE-R1 |
-| 14 | NAT/PAT configuration — EDGE-R1 |
-| 15 | `show ip nat translations` — EDGE-R1 |
-
+- 📋 [Full configuration verification & screenshots](Configurations/README.md)
+  
 ## Tools Used
 - Cisco Packet Tracer
 
