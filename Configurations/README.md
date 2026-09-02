@@ -35,8 +35,8 @@ vlan 99
 | 40 | SERVICES | (none assigned) |
 | 99 | MANAGEMENT | (none assigned) |
 
-![VLAN brief - Access-SW1](Images/01_VLAN_ACCESS-SW1.png)
-![VLAN brief - Access-SW2](Images/02_VLAN_ACCESS-SW2.png)
+![VLAN brief - Access-SW1](Images/01.VLAN,ACCESS-SW1.png)
+![VLAN brief - Access-SW2](Images/02.VLAN,ACCESS-SW2.png)
 
 ### EtherChannel (LACP) to Core
 
@@ -53,8 +53,8 @@ interface Port-channel1
 
 Both uplinks bundle Fa0/1 and Fa0/1/2 into a single logical LACP port-channel, giving the access layer redundant, load-balanced connectivity to L3-SW1.
 
-![EtherChannel summary - Access-SW1](Images/05_ETHERCHANNEL_ACCESS-SW1.png)
-![EtherChannel summary - Access-SW2](Images/06_ETHERCHANNEL_ACCESS-SW2.png)
+![EtherChannel summary - Access-SW1](Images/05.ETHERCHANNEL,ACCESS-SW1.png)
+![EtherChannel summary - Access-SW2](Images/06.ETHERCHANNEL,ACCESS-SW2.png)
 
 ### Trunk Configuration
 
@@ -68,8 +68,8 @@ interface Port-channel1
 
 The trunk carries all five VLANs (10, 20, 30, 40, 99) with native VLAN 1, confirmed active and forwarding for all of them in spanning tree.
 
-![Trunk status - Access-SW1](Images/03_TRUNK_ACCESS-SW1.png)
-![Trunk status - Access-SW2](Images/04_TRUNK_ACCESS-SW2.png)
+![Trunk status - Access-SW1](Images/03.TRUNK,ACCESS-SW1.png)
+![Trunk status - Access-SW2](Images/04.TRUNK,ACCESS-SW2.png)
 
 ---
 
@@ -91,7 +91,7 @@ interface range FastEthernet0/3-4
 
 Two independent LACP port-channels are formed: **Po1** to Access-SW1 and **Po2** to Access-SW2.
 
-![EtherChannel summary - L3-SW1](Images/07_ETHERCHANNEL_L3-SW1.png)
+![EtherChannel summary - L3-SW1](Images/07.ETHERCHANNEL,L3-SW1.png)
 
 ### SVI (Inter-VLAN Gateway) Configuration
 
@@ -121,7 +121,7 @@ interface Vlan99
  ip address 192.168.99.1 255.255.255.0
 ```
 
-![SVI addresses - L3-SW1](Images/08_SVI_L3-SW1.png)
+![SVI addresses - L3-SW1](Images/08.SVI,L3-SW1.png)
 
 ### Routing
 
@@ -131,7 +131,7 @@ ip route 0.0.0.0 0.0.0.0 10.10.10.1
 
 L3-SW1 connects to EDGE-R1 over `10.10.10.0/30` (GigabitEthernet0/1) and sends all non-local traffic to it via a default static route. All five VLAN subnets plus the transit link show as directly connected.
 
-![IP route table - L3-SW1](Images/09_ROUTES_L3-SW1.png)
+![IP route table - L3-SW1](Images/09.ROUTES,L3-SW1.png)
 
 ### DHCP Services
 
@@ -158,7 +158,7 @@ ip dhcp pool GUEST_WIFI
 
 DHCP is scoped to the three user-facing VLANs (Gaming, Staff, Guest Wi-Fi). Each pool excludes its first 10 addresses for static/infrastructure use — e.g. Staff PC1 is statically pinned to `192.168.20.50`. Services (VLAN 40) and Management (VLAN 99) are not DHCP-served.
 
-![DHCP configuration - L3-SW1](Images/10_DHCP_L3-SW1.png)
+![DHCP configuration - L3-SW1](Images/10.DHCP,L3-SW1.png)
 
 ### Security ACLs
 
@@ -179,8 +179,8 @@ ip access-list extended GUEST_INBOUND_ACL
 
 **GUEST_INBOUND_ACL** — applied inbound on the Guest Wi-Fi SVI. Denies Guest Wi-Fi traffic to Gaming, Staff, Services, *and* Management, while still permitting outbound internet access.
 
-![ACL definitions - L3-SW1](Images/11_ACL_L3-SW1.png)
-![ACLs applied to SVIs - L3-SW1](Images/12_ACL-configured-in-VLAN10_20_30_L3-SW1.png)
+![ACL definitions - L3-SW1](Images/11.ACL,L3-SW1.png)
+![ACLs applied to SVIs - L3-SW1](Images/12.ACL-configured-in-VLAN10,20,30,L3-SW1.png)
 
 ---
 
@@ -199,7 +199,7 @@ ip route 0.0.0.0 0.0.0.0 10.10.20.1
 - `Gi0/0` — `10.10.20.2/30`, WAN link to ISP-R1
 - Static route sends the full internal `192.168.0.0/16` supernet back through L3-SW1; default route points to the ISP (gateway of last resort `10.10.20.1`).
 
-![IP route table - EDGE-R1](Images/13_ROUTS_EDGE-R1.png)
+![IP route table - EDGE-R1](Images/13.ROUTS,EDGE-R1.png)
 
 ### NAT / PAT (Overload)
 
@@ -212,11 +212,11 @@ ip access-list extended NAT_TRAFFIC
 
 All traffic sourced from `192.168.0.0/16` (i.e. every internal VLAN) is translated (PAT/overload) to EDGE-R1's WAN interface address before leaving toward the ISP.
 
-![NAT configuration - EDGE-R1](Images/14_NAT_EDGE-R1.png)
+![NAT configuration - EDGE-R1](Images/14.NAT,EDGE-R1.png)
 
 **Live NAT translations** (ICMP test traffic from Gaming VLAN hosts to the ISP router, confirming outbound NAT is functioning):
 
-![NAT translation table - EDGE-R1](Images/15_NAT-translation_EDGE-R1.png)
+![NAT translation table - EDGE-R1](Images/15.NAT-translation,EDGE-R1.png)
 
 ---
 
